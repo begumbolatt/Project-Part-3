@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="app.js"></script>
+     <title>Sell</title>
+</head>
+<body>
+    <header >
+      <div id="menu-bar">
+        <h1>Sell Bar</h1>
+        <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="">List</a></li>
+        </ul>
+    </div>
+    </header> 
+    <main ng-view>
+    <div class="content">
+      <div ng-controller="myAppController">
+        <button ng-click="order = 'name'">Order by Name</button>
+        <button ng-click="order = 'price'">Order by Price</button>
+        <input type="text" ng-model="search" placeholder="search" />
+          <ul>
+            <div ng-repeat="item in items  | orderBy:order | filter:search ">
+               <h3> {{item.name}} - {{item.price | currency }}</h3>
+               <div class="remove" ng-click="removeItem(item)"> X </div>
+               <div class="update" ng-click="updateItem(item)"> + </div>
+            <span class="color" ng-style="{color:item.color}">{{item.color}}</span>
+            </div>
+            </ul>
+          <form ng-submit="addItem()">
+            <input type="text" placeholder="name" ng-model="item.name"/>
+            <input type="text" placeholder="color" ng-model="item.color"/>
+            <input type="text" placeholder="price" ng-model="item.price"/>
+            <input type="submit" value="Add Item"/>
+          </form>
+        </div>
+      </main>
+   </div>
+</body>
+</html>
