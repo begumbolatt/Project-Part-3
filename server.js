@@ -33,7 +33,9 @@ var newId = 3;
 app.get('/items', function(req, res){
     res.send({items: items});
 })
+
 app.post('/items', function(req,res){
+   
     items.push({
         id: ++newId,
         name: req.body.name,
@@ -49,12 +51,13 @@ app.put('/items/:id', function(req, res){
     var index = items.findIndex(item => item.id === parseInt(id));
 
     var editedItem = {
+        id: id,
         name:  req.body.name,
         color: req.body.color,
         price:  req.body.price,
     }
+    
     items[index] = editedItem;
-   
     res.send("updated");
 })    
 
