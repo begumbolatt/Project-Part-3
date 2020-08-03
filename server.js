@@ -48,24 +48,24 @@ app.post('/items', function(req,res){
 app.put('/items/:id', function(req, res){
     var id = req.params.id;
     console.log(id);
-    var index = items.findIndex(item => item.id === parseInt(id));
-
+    var index = items.findIndex((item) => item.id == parseInt(id));
+   
     var editedItem = {
         id: id,
         name:  req.body.name,
         color: req.body.color,
         price:  req.body.price,
     }
-    
-    items[index] = editedItem;
+    items[index]=editedItem;
     res.send("updated");
 })    
 
 app.delete('/items/:id',function (req,res) {
     var id = req.params.id;
     console.log(id);
-    var removedItem = items.findIndex(item => item.id === parseInt(id)) ;
-    items.splice(removedItem, 1)
+   var removedItem = items.findIndex(item => item.id == parseInt(id)) ;
+   items.splice(removedItem, 1)
+
     res.send("deleted")
   
 })
